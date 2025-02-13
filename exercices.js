@@ -11,6 +11,10 @@ const formRechercheArtefact = document.querySelector(
   ".form__recherche_artefact"
 );
 
+const epoque_element = document.querySelector(".localisation_epoque");
+const loading_element = document.querySelector(".voyage_en_cours");
+
+
 const epoques = {
   romaine: "Romaine",
   medievale: "Médievale",
@@ -70,10 +74,33 @@ creerLesChoixEpoque(epoques);
 // et qu'une époque de destination du voyage temporel a été choisi
 function quandEpoqueChoisie(nomEpoque) {
   nomEpoqueActuelle = nomEpoque;
+  // --- Cache l'époque de la destination
+  epoque_element.style.display = "none";
+  //---  Affiche le "loader" de chargement
+  loading_element.style.display = "block";
+
   // Utilisation de votre fonction voyagerTemps
+  voyagerTemps(nomEpoque, () => {
+    loading_element.style.display ="none";
+    epoque_element.style.display = "block";
+    afficherDestination(nomEpoque);
+  });
 }
+
+function voyagerTemps(destination, callback){
+  setTimeout( () => {
+    callback(destination);
+  }, generationNombreAleatoireEntre(1000, 3000));
+};
+
 
 // Fonction appelée plus haut quand le formulaire de recherche d'artefact est soumis
 function quandRechercheArtefact(artefact) {
   // Utilisation de votre fonction collecterArtefact
+}
+
+function collecterArtefact(nomArtefact, callback){
+  setTimeout( () => {
+    callback(nomArtefact);
+  }, generationNombreAleatoireEntre(Math.random() * 100));
 }
