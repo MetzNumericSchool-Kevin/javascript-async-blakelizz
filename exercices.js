@@ -79,6 +79,8 @@ function quandEpoqueChoisie(nomEpoque) {
   //---  Affiche le "loader" de chargement
   loading_element.style.display = "block";
 
+// ---- Le Téléporteur Temporel ----
+
   // Utilisation de votre fonction voyagerTemps
   voyagerTemps(nomEpoque, () => {
     loading_element.style.display ="none";
@@ -93,14 +95,25 @@ function voyagerTemps(destination, callback){
   }, generationNombreAleatoireEntre(1000, 3000));
 };
 
+// ----  La Collecte d'Artefact Mystère ----
 
 // Fonction appelée plus haut quand le formulaire de recherche d'artefact est soumis
+
+// Gère la recherche de l'artefact, est l'affiche
 function quandRechercheArtefact(artefact) {
   // Utilisation de votre fonction collecterArtefact
-}
+  collecterArtefact(artefact, (boolean, nom) => {
+    afficherRechercheArtefact({ artefact: nom, epoque: nomEpoqueActuelle, success: boolean });
+  });
+};
 
 function collecterArtefact(nomArtefact, callback){
   setTimeout( () => {
-    callback(nomArtefact);
-  }, generationNombreAleatoireEntre(Math.random() * 100));
-}
+    const boolean = Math.random() * 100 < 50; // Génère un booléen (true ou false)
+    callback(boolean, nomArtefact);
+  }, 1000, 3000);
+};
+
+// ----  La Mission Temporelle Complexe ----
+
+
