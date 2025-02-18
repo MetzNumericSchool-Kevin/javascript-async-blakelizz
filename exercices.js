@@ -79,18 +79,18 @@ function quandEpoqueChoisie(nomEpoque) {
   //---  Affiche le "loader" de chargement
   loading_element.style.display = "block";
 
-// ---- Le Téléporteur Temporel ----
+  // ---- Le Téléporteur Temporel ----
 
   // Utilisation de votre fonction voyagerTemps
   voyagerTemps(nomEpoque, () => {
-    loading_element.style.display ="none";
+    loading_element.style.display = "none";
     epoque_element.style.display = "block";
     afficherDestination(nomEpoque);
   });
-}
+};
 
-function voyagerTemps(destination, callback){
-  setTimeout( () => {
+function voyagerTemps(destination, callback) {
+  setTimeout(() => {
     callback(destination);
   }, generationNombreAleatoireEntre(1000, 3000));
 };
@@ -107,8 +107,8 @@ function quandRechercheArtefact(artefact) {
   });
 };
 
-function collecterArtefact(nomArtefact, callback){
-  setTimeout( () => {
+function collecterArtefact(nomArtefact, callback) {
+  setTimeout(() => {
     const boolean = Math.random() * 100 < 50; // Génère un booléen (true ou false)
     callback(boolean, nomArtefact);
   }, 1000, 3000);
@@ -116,4 +116,22 @@ function collecterArtefact(nomArtefact, callback){
 
 // ----  La Mission Temporelle Complexe ----
 
+function missionTemporelleComplexe() {
+  voyagerTemps("Médiévale", () => {
+    console.log("Tâche 1 : Voyager à l'époque médiévale");
+    collecterArtefact("Epée", () => {
+      console.log("Tâche 2 : Collecter une épée de chevalier");
+      voyagerTemps("Romaine", () => {
+        console.log("Tâche 4 : Voyager à l'époque romaine");
+        collecterArtefact("Bouclier", () => {
+          console.log("Tâche 5 : Collecter un bouclier romain");
+          collecterArtefact("Epée", () => {
+            console.log("Tâche 6 : Collecter une épée romaine");
+          });
+        });
+      });
+    });
+  });
+};
 
+missionTemporelleComplexe();
